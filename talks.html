@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Charlas, conferencias y talleres técnicos impartidos por Víctor Rodríguez Cabrera." />
+  <title>Charlas & Conferencias | Víctor Rodríguez</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body class="talks-page">
+
+  <!-- ═══════════════════════════ NAV ═══════════════════════════ -->
+  <nav class="nav" id="nav">
+    <div class="nav__container">
+      <a href="index.html" class="nav__logo">
+        <span class="nav__logo-bracket">&lt;</span>VIX<span class="nav__logo-bracket">/&gt;</span>
+      </a>
+      <ul class="nav__links" id="navLinks">
+        <li><a href="index.html#about"      class="nav__link" data-i18n="nav.about">Sobre mí</a></li>
+        <li><a href="index.html#skills"     class="nav__link" data-i18n="nav.skills">Habilidades</a></li>
+        <li><a href="index.html#experience" class="nav__link" data-i18n="nav.experience">Experiencia</a></li>
+        <li><a href="index.html#projects"   class="nav__link" data-i18n="nav.projects">Proyectos</a></li>
+        <li><a href="talks.html"            class="nav__link nav__link--cta">Charlas</a></li>
+      </ul>
+      <div class="nav__right">
+        <button class="lang-switcher" id="langSwitcher" aria-label="Switch language">
+          <span class="lang-current">ES</span>
+          <span class="lang-divider">/</span>
+          <span class="lang-alt">EN</span>
+        </button>
+        <button class="nav__toggle" id="navToggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+  <section class="talks-hero">
+    <div class="container">
+      <a href="index.html" class="talks-hero__back" data-i18n="talks.back">← Volver al inicio</a>
+      <span class="talks-hero__tag" data-i18n="talks.tag">// charlas & conferencias</span>
+      <h1 class="talks-hero__title" data-i18n="talks.page_title">Charlas & Conferencias</h1>
+      <p class="talks-hero__subtitle" data-i18n="talks.page_subtitle">
+        Eventos donde he compartido conocimiento sobre tecnología, desarrollo de software y liderazgo técnico.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ TALKS CONTENT ═══════════════════════════ -->
+  <main>
+    <div class="container">
+
+      <!-- Filter bar -->
+      <div class="talks-filters" id="talksFilters">
+        <button class="talks-filter-btn active" data-filter="all"        data-i18n="talks.filter_all">Todas</button>
+        <button class="talks-filter-btn"        data-filter="conference" data-i18n="talks.filter_conference">Conferencias</button>
+        <button class="talks-filter-btn"        data-filter="workshop"   data-i18n="talks.filter_workshop">Talleres</button>
+        <button class="talks-filter-btn"        data-filter="talk"       data-i18n="talks.filter_talk">Charlas</button>
+      </div>
+
+      <!-- Cards grid — rendered by JS -->
+      <div class="talks-grid" id="talksGrid"></div>
+
+    </div>
+  </main>
+
+  <!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <a href="index.html" class="nav__logo">
+          <span class="nav__logo-bracket">&lt;</span>VIX<span class="nav__logo-bracket">/&gt;</span>
+        </a>
+        <p class="footer__copy" data-i18n="footer.copy">© 2026 Víctor Rodríguez</p>
+        <button class="footer__top" id="backToTop" aria-label="Back to top">↑</button>
+      </div>
+    </div>
+  </footer>
+
+  <script src="i18n.js"></script>
+  <script src="script.js"></script>
+  <script>
+    // ─── Talks page logic ─────────────────────────────────────────
+    (function () {
+      const BADGE_ICONS = {
+        conference: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+        workshop:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
+        talk:       `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
+      };
+
+      const LINK_ICONS = {
+        slides:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,
+        video:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>`,
+        resources: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>`,
+      };
+
+      const MODALITY_ICONS = {
+        virtual:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,
+        presential:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`,
+        hybrid:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+      };
+
+      let currentFilter = 'all';
+
+      function youtubeId(url) {
+        if (!url) return null;
+        const m = url.match(/[?&]v=([^&#]+)/) || url.match(/youtu\.be\/([^?&#]+)/);
+        return m ? m[1] : null;
+      }
+
+      // Resolve bilingual field: accepts string or { es, en } object
+      function localize(field, lang) {
+        if (!field) return '';
+        if (typeof field === 'object') return field[lang] || field.es || '';
+        return field;
+      }
+
+      function renderTalks() {
+        const grid = document.getElementById('talksGrid');
+        if (!grid) return;
+
+        const lang = window.currentLang || 'es';
+        const ui   = translations[lang].talks;
+
+        // Sort most-recent first by year, then apply type filter
+        const sorted = [...(typeof talksData !== 'undefined' ? talksData : [])].sort((a, b) => {
+          const dateA = localize(a.date, lang);
+          const dateB = localize(b.date, lang);
+          const ya = parseInt(dateA.match(/\d{4}/)?.[0] || '0');
+          const yb = parseInt(dateB.match(/\d{4}/)?.[0] || '0');
+          return yb - ya;
+        });
+        const items = sorted.filter(item =>
+          currentFilter === 'all' || item.type === currentFilter
+        );
+
+        if (items.length === 0) {
+          grid.innerHTML = `
+            <div class="talks-empty">
+              <div class="talks-empty__icon">🎤</div>
+              <h3 class="talks-empty__title">${ui.empty_title}</h3>
+              <p class="talks-empty__desc">${ui.empty_desc}</p>
+            </div>`;
+          return;
+        }
+
+        grid.innerHTML = items.map(item => {
+          const badgeLabel   = ui['badge_' + item.type] || item.type;
+          const dateStr      = localize(item.date, lang);
+          const descStr      = localize(item.description, lang);
+          const year         = dateStr.match(/\d{4}/)?.[0] || '';
+          const modalityKey  = 'modality_' + (item.modality || '');
+          const modalityLabel = ui[modalityKey] || item.modality || '';
+
+          // Thumbnail: explicit image > YouTube auto-thumb
+          const ytId     = youtubeId(item.video);
+          const thumbSrc = item.thumbnail ||
+            (ytId ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg` : null);
+
+          const thumbnailHTML = thumbSrc ? `
+            <a href="${item.video || '#'}" target="_blank" rel="noopener noreferrer"
+               class="talk-card__thumbnail"${!item.video ? ' style="pointer-events:none"' : ''}>
+              <img src="${thumbSrc}" alt="${item.title}" loading="lazy" />
+              ${item.video ? `
+              <div class="talk-card__play">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="rgba(0,0,0,0.55)"/><polygon points="10,8 17,12 10,16" fill="white"/></svg>
+              </div>` : ''}
+            </a>` : '';
+
+          const links = ['slides', 'video', 'resources']
+            .filter(k => item[k])
+            .map(k => `
+              <a href="${item[k]}" target="_blank" rel="noopener noreferrer" class="talk-card__link">
+                ${LINK_ICONS[k]}${ui['link_' + k]}
+              </a>`).join('');
+
+          const topics = (item.topics || []).map(t =>
+            `<span class="talk-card__topic">${t}</span>`).join('');
+
+          const modalityHTML = modalityLabel ? `
+            <span class="talk-card__modality">
+              ${MODALITY_ICONS[item.modality] || ''}${modalityLabel}
+            </span>` : '';
+
+          return `
+            <article class="talk-card reveal" data-type="${item.type}">
+              ${thumbnailHTML}
+              <div class="talk-card__body">
+                <div class="talk-card__header">
+                  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+                    <span class="talk-card__badge talk-card__badge--${item.type}">
+                      ${BADGE_ICONS[item.type] || ''}${badgeLabel}
+                    </span>
+                    ${modalityHTML}
+                  </div>
+                  <span class="talk-card__year">${year}</span>
+                </div>
+                <h2 class="talk-card__title">${item.title}</h2>
+                <p class="talk-card__event">${item.event}</p>
+                <div class="talk-card__meta">
+                  <span class="talk-card__meta-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    ${dateStr}
+                  </span>
+                  <span class="talk-card__meta-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    ${item.location}
+                  </span>
+                </div>
+                ${descStr ? `<p class="talk-card__desc">${descStr}</p>` : ''}
+                ${topics ? `<div class="talk-card__topics">${topics}</div>` : ''}
+                ${links ? `<div class="talk-card__links">${links}</div>` : ''}
+              </div>
+            </article>`;
+        }).join('');
+
+        // Trigger reveal animation for newly rendered cards
+        if (typeof observeRevealElements === 'function') observeRevealElements();
+      }
+
+      function initFilters() {
+        document.querySelectorAll('.talks-filter-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            currentFilter = btn.dataset.filter;
+            document.querySelectorAll('.talks-filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderTalks();
+          });
+        });
+      }
+
+      // Re-render when language changes
+      const _origApply = window.applyTranslations;
+      document.addEventListener('DOMContentLoaded', () => {
+        renderTalks();
+        initFilters();
+
+        // Patch applyTranslations to also re-render talks on lang switch
+        const origApply = window.applyTranslations;
+        if (origApply) {
+          window.applyTranslations = function (...args) {
+            origApply.apply(this, args);
+            renderTalks();
+          };
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

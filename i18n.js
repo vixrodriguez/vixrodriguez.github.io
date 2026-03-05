@@ -11,6 +11,7 @@ const translations = {
       certs:      'Certificaciones',
       experience: 'Experiencia',
       projects:   'Proyectos',
+      talks:      'Charlas',
       contact:    'Contacto',
     },
     hero: {
@@ -420,6 +421,37 @@ const translations = {
     footer: {
       copy: '© 2026 Víctor Rodríguez',
     },
+    talks: {
+      tag:                      '// charlas & conferencias',
+      title:                    'En el escenario',
+      description:              'Conferencias, talleres y charlas técnicas impartidas en eventos de la industria, universidades y comunidades de software a lo largo de mi trayectoria.',
+      cta:                      'Ver todas las charlas →',
+      stat_conferences:         '4',
+      stat_conferences_label:   'Conferencias',
+      stat_workshops:           '3',
+      stat_workshops_label:     'Talleres',
+      stat_talks:               '5',
+      stat_talks_label:         'Charlas',
+      page_title:               'Charlas & Conferencias',
+      page_subtitle:            'Eventos donde he compartido conocimiento sobre tecnología, desarrollo de software y liderazgo técnico.',
+      back:                     '← Volver al inicio',
+      filter_all:               'Todas',
+      filter_conference:        'Conferencias',
+      filter_workshop:          'Talleres',
+      filter_talk:              'Charlas',
+      badge_conference:         'Conferencia',
+      badge_workshop:           'Taller',
+      badge_talk:               'Charla',
+      link_slides:              'Slides',
+      link_video:               'Video',
+      link_resources:           'Recursos',
+      modality_virtual:         'Virtual',
+      modality_presential:      'Presencial',
+      modality_hybrid:          'Híbrido',
+      lbl_modality:             'Modalidad',
+      empty_title:              'Próximamente',
+      empty_desc:               'Las charlas y conferencias serán publicadas aquí muy pronto.',
+    },
   },
 
   /* ──────────────────────────── ENGLISH ──────────────────────────── */
@@ -430,6 +462,7 @@ const translations = {
       certs:      'Certifications',
       experience: 'Experience',
       projects:   'Projects',
+      talks:      'Talks',
       contact:    'Contact',
     },
     hero: {
@@ -839,8 +872,66 @@ const translations = {
     footer: {
       copy: '© 2026 Víctor Rodríguez',
     },
+    talks: {
+      tag:                      '// talks & conferences',
+      title:                    'On Stage',
+      description:              'Conferences, workshops, and technical talks delivered at industry events, universities, and software communities throughout my career.',
+      cta:                      'See all talks →',
+      stat_conferences:         '4',
+      stat_conferences_label:   'Conferences',
+      stat_workshops:           '3',
+      stat_workshops_label:     'Workshops',
+      stat_talks:               '5',
+      stat_talks_label:         'Talks',
+      page_title:               'Talks & Conferences',
+      page_subtitle:            'Events where I have shared knowledge about technology, software development, and technical leadership.',
+      back:                     '← Back to home',
+      filter_all:               'All',
+      filter_conference:        'Conferences',
+      filter_workshop:          'Workshops',
+      filter_talk:              'Talks',
+      badge_conference:         'Conference',
+      badge_workshop:           'Workshop',
+      badge_talk:               'Talk',
+      link_slides:              'Slides',
+      link_video:               'Video',
+      link_resources:           'Resources',
+      modality_virtual:         'Virtual',
+      modality_presential:      'In-person',
+      modality_hybrid:          'Hybrid',
+      lbl_modality:             'Modality',
+      empty_title:              'Coming Soon',
+      empty_desc:               'Talks and conferences will be published here very soon.',
+    },
   },
 };
+
+/* ============================================================
+   TALKS DATA — single source of truth, bilingual fields
+   Add new talks here. Descriptions provided in ES are translated to EN.
+   Fields with object value { es, en } are language-aware.
+   All other fields (type, event, location, topics, links) are language-neutral.
+   Talks are sorted most-recent → oldest automatically by the renderer.
+   ============================================================ */
+const talksData = [
+  {
+    type:        'workshop',
+    title:       'AWS + Odoo',
+    event:       'FLISoL Loja 2021',
+    date:        { es: 'Abril 2021',  en: 'April 2021' },
+    location:    'Loja, Ecuador',
+    modality:    'virtual',           // 'virtual' | 'presential' | 'hybrid'
+    description: {
+      es: 'Demostración en vivo sobre el despliegue de una arquitectura basada en Amazon Web Services para ejecutar el ERP de Odoo. Se explicó cómo crear una infraestructura en la nube con VPC, subredes públicas y privadas, tablas de ruteo, Internet Gateway, instancias EC2 para servidores Ubuntu y bases de datos RDS. También se mostró cómo configurar dominios con Route 53 y habilitar conexiones seguras con certificados SSL usando Certbot.',
+      en: 'Live demonstration of deploying an Amazon Web Services-based architecture to run the Odoo ERP. Covered building a cloud infrastructure with VPC, public and private subnets, routing tables, Internet Gateway, EC2 instances for Ubuntu servers, and RDS databases. Also showed how to configure domains with Route 53 and enable secure connections using SSL certificates with Certbot.',
+    },
+    topics:      ['Python', 'AWS', 'Odoo', 'ERP'],
+    slides:      '',
+    video:       'https://www.youtube.com/watch?v=hE8edNyfqI4&t=7087s',
+    resources:   '',
+    thumbnail:   './assets/talks/flisol-loja-2021.png',
+  },
+];
 
 /* ============================================================
    LANGUAGE DETECTION
