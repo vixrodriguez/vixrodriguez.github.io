@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Víctor Rodríguez Cabrera – Senior Software Engineer with 10+ years of experience in Python, Odoo, Java Spring Boot, and cloud architectures." />
+  <title>Víctor Rodríguez | Senior Software Engineer</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════ NAV ═══════════════════════════ -->
+  <nav class="nav" id="nav">
+    <div class="nav__container">
+      <a href="#home" class="nav__logo">
+        <span class="nav__logo-bracket">&lt;</span>VIX<span class="nav__logo-bracket">/&gt;</span>
+      </a>
+
+      <ul class="nav__links" id="navLinks">
+        <li><a href="#about"      class="nav__link" data-i18n="nav.about">Sobre mí</a></li>
+        <li><a href="#skills"     class="nav__link" data-i18n="nav.skills">Habilidades</a></li>
+        <li><a href="#certs"      class="nav__link" data-i18n="nav.certs">Certificaciones</a></li>
+        <li><a href="#experience" class="nav__link" data-i18n="nav.experience">Experiencia</a></li>
+        <li><a href="#projects"   class="nav__link" data-i18n="nav.projects">Proyectos</a></li>
+        <li><a href="#contact"    class="nav__link nav__link--cta" data-i18n="nav.contact">Contacto</a></li>
+      </ul>
+
+      <div class="nav__right">
+        <!-- Language switcher -->
+        <button class="lang-switcher" id="langSwitcher" aria-label="Switch language">
+          <span class="lang-current">ES</span>
+          <span class="lang-divider">/</span>
+          <span class="lang-alt">EN</span>
+        </button>
+        <button class="nav__toggle" id="navToggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+  <section class="hero" id="home">
+    <div class="hero__bg">
+      <div class="hero__grid"></div>
+      <div class="hero__blob hero__blob--1"></div>
+      <div class="hero__blob hero__blob--2"></div>
+    </div>
+    <div class="hero__container">
+      <div class="hero__badge reveal">
+        <span class="hero__badge-dot"></span>
+        <span id="heroBadgeText" data-i18n="hero.badge">Disponible para nuevas oportunidades</span>
+      </div>
+
+      <h1 class="hero__title reveal">
+        <span class="hero__name">Víctor Rodríguez</span>
+        <br />
+        <span class="hero__title-highlight" data-i18n="hero.title">Senior Software Engineer</span>
+      </h1>
+
+      <p class="hero__subtitle reveal" data-i18n-html="hero.subtitle">
+        Más de <strong>10 años</strong> construyendo aplicaciones web, APIs e integraciones escalables.
+      </p>
+
+      <div class="hero__actions reveal">
+        <a href="#projects" class="btn btn--primary" data-i18n="hero.cta_primary">Ver proyectos</a>
+        <a href="#contact"  class="btn btn--ghost"   data-i18n="hero.cta_ghost">Hablemos</a>
+      </div>
+
+      <div class="hero__stats reveal">
+        <div class="hero__stat">
+          <span class="hero__stat-number">10<span class="hero__stat-plus">+</span></span>
+          <span class="hero__stat-label" data-i18n="hero.stat1">Años de experiencia</span>
+        </div>
+        <div class="hero__stat-divider"></div>
+        <div class="hero__stat">
+          <span class="hero__stat-number">20<span class="hero__stat-plus">+</span></span>
+          <span class="hero__stat-label" data-i18n="hero.stat2">Proyectos entregados</span>
+        </div>
+        <div class="hero__stat-divider"></div>
+        <div class="hero__stat">
+          <span class="hero__stat-number">8<span class="hero__stat-plus">+</span></span>
+          <span class="hero__stat-label" data-i18n="hero.stat3">Industrias atendidas</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero__scroll" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ ABOUT ═══════════════════════════ -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag" data-i18n="about.tag">// sobre mí</span>
+        <h2 class="section-title" data-i18n="about.title">Quién soy</h2>
+      </div>
+
+      <div class="about__grid">
+        <!-- Left column -->
+        <div class="about__image-wrapper reveal">
+          <div class="about__image-frame">
+            <div class="about__avatar about__avatar--photo">
+              <img src="assets/profile.png" alt="Víctor Rodríguez Cabrera" />
+            </div>
+            <div class="about__image-decoration"></div>
+          </div>
+          <div class="about__tech-stack">
+            <span class="tech-pill">Python</span>
+            <span class="tech-pill">Odoo</span>
+            <span class="tech-pill">Java</span>
+            <span class="tech-pill">AWS</span>
+            <span class="tech-pill">Docker</span>
+            <span class="tech-pill">Flask</span>
+          </div>
+        </div>
+
+        <!-- Right column -->
+        <div class="about__content reveal">
+          <p class="about__text" data-i18n-html="about.p1"></p>
+          <p class="about__text" data-i18n-html="about.p2"></p>
+          <p class="about__text" data-i18n-html="about.p3"></p>
+
+          <div class="about__facts">
+            <div class="about__fact" data-i18n-html="about.fact1"></div>
+            <div class="about__fact" data-i18n-html="about.fact2"></div>
+            <div class="about__fact" data-i18n-html="about.fact3"></div>
+          </div>
+
+          <a href="Resume-Victor_Rodriguez.pdf" download class="btn btn--outline" data-i18n="about.download">
+            Descargar CV
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ SKILLS ═══════════════════════════ -->
+  <section class="skills" id="skills">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag" data-i18n="skills.tag">// habilidades</span>
+        <h2 class="section-title" data-i18n="skills.title">Stack tecnológico</h2>
+      </div>
+      <!-- Dynamically rendered by i18n.js -->
+      <div class="skills__grid" id="skillsGrid"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ CERTS ═══════════════════════════ -->
+  <section class="certs-section" id="certs">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag" data-i18n="certs.tag">// certificaciones &amp; educación</span>
+        <h2 class="section-title" data-i18n="certs.title">Formación académica y profesional</h2>
+      </div>
+
+      <div class="certs-layout">
+        <div class="certs-col">
+          <h3 class="certs-col__title reveal" data-i18n="certs.edu_title">Educación</h3>
+          <!-- Dynamically rendered by i18n.js -->
+          <div id="eduList"></div>
+        </div>
+        <div class="certs-col">
+          <h3 class="certs-col__title reveal" data-i18n="certs.cert_title">Certificaciones</h3>
+          <!-- Dynamically rendered by i18n.js -->
+          <div class="cert-grid" id="certList"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ EXPERIENCE ═══════════════════════════ -->
+  <section class="experience" id="experience">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag" data-i18n="experience.tag">// experiencia</span>
+        <h2 class="section-title" data-i18n="experience.title">Trayectoria profesional</h2>
+      </div>
+
+      <!-- TAB SWITCHER + COLLAPSE ALL -->
+      <div class="exp-controls reveal">
+        <div class="exp-tabs">
+          <button class="exp-tab exp-tab--active" data-tab="summary"  data-i18n="experience.tab_summary">Resumida</button>
+          <button class="exp-tab"                 data-tab="extended" data-i18n="experience.tab_extended">Extendida</button>
+        </div>
+        <button id="expToggleAll" class="exp-toggle-all" data-state="expanded">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/><polyline points="6 15 12 21 18 15" opacity="0.4"/></svg>
+          <span data-i18n="experience.collapse_all">Colapsar todo</span>
+        </button>
+      </div>
+
+      <!-- Dynamically rendered by i18n.js -->
+      <div class="timeline" id="timelineContainer"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ PROJECTS ═══════════════════════════ -->
+  <section class="projects" id="projects">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag" data-i18n="projects.tag">// proyectos</span>
+        <h2 class="section-title" data-i18n="projects.title">Proyectos destacados</h2>
+      </div>
+      <!-- Dynamically rendered by i18n.js -->
+      <div class="projects__grid" id="projectsGrid"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ CONTACT ═══════════════════════════ -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="contact__inner reveal">
+        <div class="section-header section-header--left">
+          <span class="section-tag" data-i18n="contact.tag">// contacto</span>
+          <h2 class="section-title" data-i18n="contact.title">Hablemos</h2>
+        </div>
+        <p class="contact__text" data-i18n="contact.text">
+          ¿Tienes un proyecto en mente? Me encantaría escucharte.
+        </p>
+
+        <div class="contact__channels">
+          <a href="mailto:victor.rodriguez.ca@gmail.com" class="contact__link">
+            <div class="contact__link-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <div>
+              <span class="contact__link-label" data-i18n="contact.lbl_email">Correo</span>
+              <span class="contact__link-value">victor.rodriguez.ca@gmail.com</span>
+            </div>
+          </a>
+
+          <a href="https://www.linkedin.com/in/victorrodriguezc/" target="_blank" rel="noopener" class="contact__link">
+            <div class="contact__link-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                <rect x="2" y="9" width="4" height="12"/>
+                <circle cx="4" cy="4" r="2"/>
+              </svg>
+            </div>
+            <div>
+              <span class="contact__link-label" data-i18n="contact.lbl_linkedin">LinkedIn</span>
+              <span class="contact__link-value">linkedin.com/in/victorrodriguezc</span>
+            </div>
+          </a>
+        </div>
+
+        <!--
+        FORMULARIO DE CONTACTO — deshabilitado temporalmente, reactivar cuando sea necesario
+        <form class="contact__form" id="contactForm" novalidate>
+          <div class="form-group">
+            <label for="name" data-i18n="contact.name_label">Nombre</label>
+            <input type="text" id="name" name="name"
+                   data-i18n-placeholder="contact.name_ph"
+                   placeholder="Tu nombre completo" required />
+          </div>
+          <div class="form-group">
+            <label for="email" data-i18n="contact.email_label">Correo electrónico</label>
+            <input type="email" id="email" name="email"
+                   data-i18n-placeholder="contact.email_ph"
+                   placeholder="tu@correo.com" required />
+          </div>
+          <div class="form-group">
+            <label for="message" data-i18n="contact.msg_label">Mensaje</label>
+            <textarea id="message" name="message" rows="5"
+                      data-i18n-placeholder="contact.msg_ph"
+                      placeholder="Cuéntame sobre tu proyecto…" required></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--full" id="submitBtn"
+                  data-i18n="contact.send">
+            Enviar mensaje
+          </button>
+        </form>
+        -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <a href="#home" class="nav__logo">
+          <span class="nav__logo-bracket">&lt;</span>VIX<span class="nav__logo-bracket">/&gt;</span>
+        </a>
+        <p class="footer__copy" data-i18n="footer.copy">
+          © 2026 Víctor Rodríguez
+        </p>
+        <button class="footer__top" id="backToTop" aria-label="Back to top">↑</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts: i18n first, then interactions -->
+  <script src="i18n.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
