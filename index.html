@@ -209,8 +209,13 @@
         <span class="section-tag" data-i18n="projects.tag">// proyectos</span>
         <h2 class="section-title" data-i18n="projects.title">Proyectos destacados</h2>
       </div>
-      <!-- Dynamically rendered by i18n.js -->
-      <div class="projects__grid" id="projectsGrid"></div>
+      <!-- Dynamically rendered by i18n.js — data-limit caps visible cards -->
+      <div class="projects__grid" id="projectsGrid" data-limit="5"></div>
+      <div class="projects__cta reveal">
+        <a href="projects.html" class="btn btn--outline" data-i18n="projects.view_all">
+          Ver todos los proyectos →
+        </a>
+      </div>
     </div>
   </section>
 

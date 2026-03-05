@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Todos los proyectos de Víctor Rodríguez Cabrera – plataformas, integraciones y productos desarrollados a lo largo de su carrera." />
+  <title>Proyectos | Víctor Rodríguez</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════ NAV ═══════════════════════════ -->
+  <nav class="nav" id="nav">
+    <div class="nav__container">
+      <a href="index.html" class="nav__logo">
+        <span class="nav__logo-bracket">&lt;</span>VIX<span class="nav__logo-bracket">/&gt;</span>
+      </a>
+      <ul class="nav__links" id="navLinks">
+        <li><a href="index.html#about"      class="nav__link" data-i18n="nav.about">Sobre mí</a></li>
+        <li><a href="index.html#skills"     class="nav__link" data-i18n="nav.skills">Habilidades</a></li>
+        <li><a href="index.html#experience" class="nav__link" data-i18n="nav.experience">Experiencia</a></li>
+        <li><a href="index.html#projects"   class="nav__link" data-i18n="nav.projects">Proyectos</a></li>
+        <li><a href="talks.html"            class="nav__link" data-i18n="nav.talks">Charlas</a></li>
+        <li><a href="index.html#contact"    class="nav__link nav__link--cta" data-i18n="nav.contact">Contacto</a></li>
+      </ul>
+      <div class="nav__right">
+        <button class="lang-switcher" id="langSwitcher" aria-label="Switch language">
+          <span class="lang-current">ES</span>
+          <span class="lang-divider">/</span>
+          <span class="lang-alt">EN</span>
+        </button>
+        <button class="nav__toggle" id="navToggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+  <section class="projects-hero">
+    <div class="container">
+      <a href="index.html" class="projects-hero__back" data-i18n="projects.back">← Volver al inicio</a>
+      <span class="projects-hero__tag" data-i18n="projects.tag">// proyectos</span>
+      <h1 class="projects-hero__title" data-i18n="projects.page_title">Todos los proyectos</h1>
+      <p class="projects-hero__subtitle" data-i18n="projects.page_subtitle">
+        Colección completa de proyectos: productos, plataformas e integraciones desarrollados a lo largo de mi carrera.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ PROJECTS GRID ═══════════════════════════ -->
+  <main>
+    <div class="container">
+      <!-- Rendered by i18n.js — no data-limit means all projects are shown -->
+      <div class="projects-all__grid" id="projectsGrid"></div>
+    </div>
+  </main>
+
+  <!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <a href="index.html" class="nav__logo">
+          <span class="nav__logo-bracket">&lt;</span>VIX<span class="nav__logo-bracket">/&gt;</span>
+        </a>
+        <p class="footer__copy" data-i18n="footer.copy">© 2026 Víctor Rodríguez</p>
+        <button class="footer__top" id="backToTop" aria-label="Back to top">↑</button>
+      </div>
+    </div>
+  </footer>
+
+  <script src="i18n.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

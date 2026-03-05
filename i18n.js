@@ -369,35 +369,46 @@ const translations = {
     projects: {
       tag:            '// proyectos',
       title:          'Proyectos destacados',
-      featured_label: 'Proyecto destacado',
+      featured_label: '★ Proyecto destacado',
+      view_all:       'Ver todos los proyectos →',
+      page_title:     'Todos los proyectos',
+      page_subtitle:  'Colección completa de proyectos: productos, plataformas e integraciones desarrollados a lo largo de mi carrera.',
+      back:           '← Volver al inicio',
       items: [
         {
-          featured: true,
+          relevance: 'featured',
           title: 'NAWI – Plataforma Fintech de Microservicios',
           desc:  'Arquitectura hexagonal de 7+ microservicios para una neobank. Procesamiento de transferencias C2C, retiros ATM, compras nacionales/internacionales e integración con autorizadores externos Dock y STP México.',
           tech:  ['Python', 'Flask', 'Microservicios', 'AWS', 'Hexagonal Arch.'],
           repo:  '#', demo: 'https://nawicard.com/',
         },
         {
-          featured: false,
+          relevance: 'relevant',
           title: 'Wambala – Plataforma para Atletas de Alto Rendimiento',
           desc:  'Migración completa de React.js + Flask + SQLite a Next.js + PostgreSQL. Optimización de generación de horarios deportivos, notificaciones Firebase y entrega de emails con SendGrid.',
           tech:  ['Next.js', 'Flask', 'PostgreSQL', 'Firebase', 'SendGrid'],
           repo:  '#', demo: 'https://wambala.es/',
         },
         {
-          featured: false,
+          relevance: 'relevant',
           title: 'BitBase – Middleware para Exchange de Cripto',
           desc:  'Middleware Flask que sincroniza transacciones de ATMs/tiendas a Odoo v15 vía JSON-RPC. Generación de facturas/cotizaciones PDF y manejo de eventos asíncronos con Amazon MQ (RabbitMQ).',
           tech:  ['Python', 'Flask', 'Odoo v15', 'RabbitMQ', 'ELK'],
           repo:  '#', demo: 'http://bitbase.es/',
         },
         {
-          featured: false,
+          relevance: 'standard',
           title: 'Loga Hub – Plataforma de Logística y Aduanas',
           desc:  'Módulos de auditoría, itinerarios de navieras y segmentos de socios. Microservicio de reportes con Java Spring Boot e iText7 que desacoupló la carga de generación de documentos del servidor principal.',
           tech:  ['Java', 'Spring Boot', 'Python', 'iText7', 'PostgreSQL'],
-          repo:  '#', demo: 'https://logihub.com/',
+          demo: 'https://logihub.com/',
+        },
+        {
+          relevance: 'standard',
+          title: 'Avasant – Sitio Web Corporativo',
+          desc:  'Desarrollo y gestión integral del ecosistema digital de Avasant Consulting S.A.S., consultora especializada en aceleración empresarial y empoderamiento para mujeres emprendedoras y población migrante. Diseño y despliegue bajo WordPress, Astra y Spectra, gestión de infraestructura en Hostinger e integración de Google Workspace. Soluciones técnicas para entrega de contenido multimedia de alta fidelidad.',
+          tech:  ['WordPress', 'PHP', 'JavaScript', 'HTML', 'CSS', 'Hostinger', 'DNS', 'Google'],
+          demo: 'https://avasant-consulting.com/',
         },
       ],
     },
@@ -820,35 +831,46 @@ const translations = {
     projects: {
       tag:            '// projects',
       title:          'Featured projects',
-      featured_label: 'Featured project',
+      featured_label: '★ Featured project',
+      view_all:       'See all projects →',
+      page_title:     'All projects',
+      page_subtitle:  'Full collection of projects: products, platforms and integrations developed throughout my career.',
+      back:           '← Back to home',
       items: [
         {
-          featured: true,
+          relevance: 'featured',
           title: 'NAWI – Fintech Microservices Platform',
           desc:  'Hexagonal architecture with 7+ microservices for a neobank. C2C transfers, ATM withdrawals, national/international purchases, and integration with external authorizers Dock and STP México.',
           tech:  ['Python', 'Flask', 'Microservices', 'AWS', 'Hexagonal Arch.'],
           repo: '#', demo: 'https://nawicard.com/',
         },
         {
-          featured: false,
+          relevance: 'relevant',
           title: 'Wambala – High-Performance Athlete Platform',
           desc:  'Full platform migration from React.js + Flask + SQLite to Next.js + PostgreSQL. Sports schedule optimization, Firebase notifications, and SendGrid email delivery.',
           tech:  ['Next.js', 'Flask', 'PostgreSQL', 'Firebase', 'SendGrid'],
           repo: '#', demo: 'https://wambala.es/',
         },
         {
-          featured: false,
+          relevance: 'relevant',
           title: 'BitBase – Crypto Exchange Middleware',
           desc:  'Flask middleware synchronizing transactions from sales channels (ATMs/stores) to Odoo v15 via JSON-RPC. PDF invoice/quote generation and async event handling with Amazon MQ (RabbitMQ).',
           tech:  ['Python', 'Flask', 'Odoo v15', 'RabbitMQ', 'ELK'],
           repo: '#', demo: 'http://bitbase.es/',
         },
         {
-          featured: false,
+          relevance: 'standard',
           title: 'Loga Hub – Logistics & Customs Platform',
           desc:  'Audit, shipping line itinerary, and partner segment modules. Reporting microservice with Java Spring Boot and iText7 that decoupled document generation load from the main server.',
           tech:  ['Java', 'Spring Boot', 'Python', 'iText7', 'PostgreSQL'],
-          repo: '#', demo: 'https://logihub.com/',
+          demo: 'https://logihub.com/',
+        },
+        {
+          relevance: 'standard',
+          title: 'Avasant – Corporate Website',
+          desc:  'End-to-end development and management of the digital ecosystem for Avasant Consulting S.A.S., a consultancy specializing in business acceleration programs and empowerment for women entrepreneurs and migrant populations. Design and deployment under WordPress, Astra, and Spectra, infrastructure management on Hostinger, and Google Workspace integration for firm operations. Advanced technical solutions for high-fidelity multimedia content delivery.',
+          tech:  ['WordPress', 'PHP', 'JavaScript', 'HTML', 'CSS', 'Hostinger', 'DNS', 'Google'],
+          demo: 'https://avasant-consulting.com/',
         },
       ],
     },
@@ -1150,17 +1172,26 @@ function renderExperience() {
   }, 200);
 }
 
+const RELEVANCE_ORDER = { featured: 0, relevant: 1, standard: 2 };
+
 function renderProjects() {
   const container = document.getElementById('projectsGrid');
   if (!container) return;
   const { items, featured_label } = t('projects');
-  container.innerHTML = items.map(p => `
-    <article class="project-card ${p.featured ? 'project-card--featured' : ''} reveal">
+
+  // Sort by relevance then apply optional limit from data-limit attribute
+  const sorted = [...items].sort((a, b) =>
+    (RELEVANCE_ORDER[a.relevance] ?? 2) - (RELEVANCE_ORDER[b.relevance] ?? 2)
+  );
+  const limit = parseInt(container.dataset.limit) || Infinity;
+  const visible = sorted.slice(0, limit);
+
+  container.innerHTML = visible.map(p => `
+    <article class="project-card ${p.relevance === 'featured' ? 'project-card--featured' : ''} reveal">
       <div class="project-card__top">
-        ${p.featured ? `<span class="project-card__label">${featured_label}</span>` : '<span></span>'}
+        ${p.relevance === 'featured' ? `<span class="project-card__label">${featured_label}</span>` : '<span></span>'}
         <div class="project-card__links">
-          <a href="${p.repo}" aria-label="Repo">${githubIcon}</a>
-          <a href="${p.demo}" aria-label="Demo" target="_blank" rel="noopener noreferrer">${externalIcon}
+          ${p.demo ? `<a href="${p.demo}" aria-label="Demo" target="_blank" rel="noopener noreferrer">${externalIcon}</a>` : ''}
         </div>
       </div>
       <h3 class="project-card__title">${p.title}</h3>
