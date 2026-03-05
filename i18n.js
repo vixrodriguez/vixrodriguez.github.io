@@ -916,6 +916,23 @@ const translations = {
 const talksData = [
   {
     type:        'workshop',
+    title:       '𝘼𝙥𝙧𝙚𝙣𝙙𝙚 𝙎𝙘𝙧𝙪𝙢 𝙮 𝙣𝙤 𝙢𝙤𝙧𝙞𝙧 𝙚𝙣 𝙚𝙡 𝙞𝙣𝙩𝙚𝙣𝙩𝙤',
+    event:       'IEEE RNR Latacunga 2022',
+    date:        { es: 'Septiembre 2022', en: 'September 2022' },
+    location:    'Latacunga, Ecuador',
+    modality:    'presential',
+    description: {
+      es: 'En la presentación se expone el marco de trabajo ágil SCRUM como una solución flexible frente al rígido modelo tradicional en cascada, con el objetivo de reducir errores y entregar productos funcionales a corto plazo. Se detalla que esta metodología se fundamenta en un equipo colaborativo y sin jerarquías compuesto por el Product Owner, el Scrum Master y los Developers que estructura su trabajo en ciclos de hasta un mes denominados Sprints. A través de estos Sprints y sus respectivos eventos tales como Sprint Planning, Daily Scrum, Sprint Review y Sprint Retrospective, se asegura la mejora continua y la rápida adaptación a los cambios. La sesión finaliza destacando la ventaja profesional de obtener certificaciones oficiales y dando paso a un taller práctico de simulación.',
+      en: 'The presentation introduces the SCRUM agile framework as a flexible alternative to the rigid traditional waterfall model, aiming to reduce errors and deliver functional products in the short term. It details that this methodology is based on a collaborative and non-hierarchical team—composed of the Product Owner, the Scrum Master, and the Developers—that structures its work in cycles of up to one month called Sprints. Through these Sprints and their respective events, such as Sprint Planning, Daily Scrum, Sprint Review, and Sprint Retrospective, continuous improvement and rapid adaptation to changes are ensured. The session concludes by highlighting the professional advantage of obtaining official certifications and making way for a practical simulation workshop.',
+    },
+    topics:      ['IEEE', 'Scrum', 'Agile'],
+    slides:      '',
+    video:       '',
+    resources:   'https://www.linkedin.com/posts/victorrodriguezc_peque%C3%B1o-extracto-de-mi-ponencia-%F0%9D%98%BC%F0%9D%99%A5%F0%9D%99%A7%F0%9D%99%9A-activity-6977662961377026048-2P3U',
+    thumbnail:   './assets/talks/rnr-latacunga-2022.png',
+  },
+  {
+    type:        'workshop',
     title:       'AWS + Odoo',
     event:       'FLISoL Loja 2021',
     date:        { es: 'Abril 2021',  en: 'April 2021' },
