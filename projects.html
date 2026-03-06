@@ -51,11 +51,25 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════ PROJECTS GRID ═══════════════════════════ -->
+  <!-- ═══════════════════════════ MAIN ═══════════════════════════ -->
   <main>
     <div class="container">
-      <!-- Rendered by i18n.js — no data-limit means all projects are shown -->
-      <div class="projects-all__grid" id="projectsGrid"></div>
+
+      <!-- Tech filter chips -->
+      <div class="proj-filter-bar" id="projFilterBar">
+        <p class="proj-filter-bar__label" id="projFilterLabel"></p>
+        <div class="proj-filter-chips" id="projFilterChips"></div>
+      </div>
+
+      <!-- Results info -->
+      <p class="proj-results-info" id="projResultsInfo"></p>
+
+      <!-- Grid — uses a separate ID so renderProjects() in i18n.js is a no-op here -->
+      <div class="projects-all__grid" id="projectsAllGrid"></div>
+
+      <!-- Pagination -->
+      <div class="proj-pagination" id="projPagination"></div>
+
     </div>
   </main>
 
@@ -74,5 +88,193 @@
 
   <script src="i18n.js"></script>
   <script src="script.js"></script>
+  <script>
+  (function () {
+    /* ── Constants ─────────────────────────────────────────────── */
+    const PAGE_SIZE   = 5;
+    const REL_ORDER   = { featured: 0, relevant: 1, standard: 2 };
+    const externalIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+      <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
+
+    /* ── State ─────────────────────────────────────────────────── */
+    let activeTechs = new Set();
+    let currentPage = 1;
+
+    /* ── Helpers ───────────────────────────────────────────────── */
+    function ui() { return t('projects'); }
+
+    function sortedItems() {
+      const lang = window.currentLang || 'es';
+      return [...ui().items].sort((a, b) => {
+        const rDiff = (REL_ORDER[a.relevance] ?? 2) - (REL_ORDER[b.relevance] ?? 2);
+        if (rDiff !== 0) return rDiff;
+        return a.title.localeCompare(b.title, lang, { sensitivity: 'base' });
+      });
+    }
+
+    function filteredItems() {
+      const all = sortedItems();
+      if (activeTechs.size === 0) return all;
+      return all.filter(p => p.tech.some(tech => activeTechs.has(tech)));
+    }
+
+    function allTechs() {
+      const set = new Set();
+      ui().items.forEach(p => p.tech.forEach(t => set.add(t)));
+      return [...set].sort((a, b) => a.localeCompare(b));
+    }
+
+    /* ── Render filter chips ──────────────────────────────────── */
+    function renderFilters() {
+      const chips  = document.getElementById('projFilterChips');
+      const label  = document.getElementById('projFilterLabel');
+      if (!chips || !label) return;
+
+      label.textContent = ui().filter_label;
+
+      const techs = allTechs();
+      chips.innerHTML = techs.map(tech => `
+        <button class="proj-filter-chip${activeTechs.has(tech) ? ' active' : ''}"
+                data-tech="${tech}">${tech}</button>
+      `).join('') + (activeTechs.size > 0 ? `
+        <button class="proj-filter-chip proj-filter-chip--clear" id="clearFiltersBtn">
+          ✕ ${ui().clear_filters}
+        </button>` : '');
+
+      chips.querySelectorAll('.proj-filter-chip[data-tech]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const tech = btn.dataset.tech;
+          activeTechs.has(tech) ? activeTechs.delete(tech) : activeTechs.add(tech);
+          currentPage = 1;
+          render();
+        });
+      });
+
+      const clearBtn = chips.querySelector('#clearFiltersBtn');
+      if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+          activeTechs.clear();
+          currentPage = 1;
+          render();
+        });
+      }
+    }
+
+    /* ── Render grid ──────────────────────────────────────────── */
+    function renderGrid() {
+      const grid = document.getElementById('projectsAllGrid');
+      const info = document.getElementById('projResultsInfo');
+      if (!grid) return;
+
+      const items    = filteredItems();
+      const total    = items.length;
+      const start    = (currentPage - 1) * PAGE_SIZE;
+      const end      = Math.min(start + PAGE_SIZE, total);
+      const page     = items.slice(start, end);
+      const { featured_label, showing_pre, showing_mid, showing_post, no_results } = ui();
+
+      if (info) {
+        info.textContent = total > 0
+          ? `${showing_pre} ${start + 1}–${end} ${showing_mid} ${total} ${showing_post}`
+          : '';
+      }
+
+      if (page.length === 0) {
+        grid.innerHTML = `<p class="proj-no-results">${no_results}</p>`;
+        return;
+      }
+
+      grid.innerHTML = page.map(p => `
+        <article class="project-card ${p.relevance === 'featured' ? 'project-card--featured' : ''} reveal">
+          <div class="project-card__top">
+            ${p.relevance === 'featured'
+              ? `<span class="project-card__label">${featured_label}</span>`
+              : '<span></span>'}
+            <div class="project-card__links">
+              ${p.demo ? `<a href="${p.demo}" aria-label="Demo" target="_blank"
+                rel="noopener noreferrer">${externalIcon}</a>` : ''}
+            </div>
+          </div>
+          <h3 class="project-card__title">${p.title}</h3>
+          <p class="project-card__desc">${p.desc}</p>
+          <div class="project-card__tech">
+            ${p.tech.map(tag => `<span class="${activeTechs.has(tag) ? 'tech-active' : ''}">${tag}</span>`).join('')}
+          </div>
+        </article>
+      `).join('');
+
+      if (typeof observeRevealElements === 'function') observeRevealElements();
+    }
+
+    /* ── Render pagination ────────────────────────────────────── */
+    function renderPagination() {
+      const container = document.getElementById('projPagination');
+      if (!container) return;
+
+      const total     = filteredItems().length;
+      const totalPages = Math.ceil(total / PAGE_SIZE);
+      const { prev, next } = ui();
+
+      if (totalPages <= 1) { container.innerHTML = ''; return; }
+
+      // Build page number list with ellipsis
+      const pages = [];
+      for (let i = 1; i <= totalPages; i++) {
+        if (i === 1 || i === totalPages || Math.abs(i - currentPage) <= 1) {
+          pages.push(i);
+        } else if (pages[pages.length - 1] !== '…') {
+          pages.push('…');
+        }
+      }
+
+      const btns = pages.map(p => {
+        if (p === '…') return `<span class="proj-page-ellipsis">…</span>`;
+        return `<button class="proj-page-btn${p === currentPage ? ' active' : ''}"
+                        data-page="${p}">${p}</button>`;
+      }).join('');
+
+      container.innerHTML = `
+        <button class="proj-page-btn" data-page="${currentPage - 1}"
+                ${currentPage === 1 ? 'disabled' : ''}>${prev}</button>
+        ${btns}
+        <button class="proj-page-btn" data-page="${currentPage + 1}"
+                ${currentPage === totalPages ? 'disabled' : ''}>${next}</button>`;
+
+      container.querySelectorAll('.proj-page-btn[data-page]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const p = parseInt(btn.dataset.page);
+          if (!isNaN(p) && p >= 1 && p <= totalPages) {
+            currentPage = p;
+            render();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        });
+      });
+    }
+
+    /* ── Full render ──────────────────────────────────────────── */
+    function render() {
+      renderFilters();
+      renderGrid();
+      renderPagination();
+    }
+
+    /* ── Init ─────────────────────────────────────────────────── */
+    document.addEventListener('DOMContentLoaded', () => {
+      render();
+
+      // Re-render on language switch
+      const origApply = window.applyTranslations;
+      if (origApply) {
+        window.applyTranslations = function (...args) {
+          origApply.apply(this, args);
+          render();
+        };
+      }
+    });
+  })();
+  </script>
 </body>
 </html>

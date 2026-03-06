@@ -972,7 +972,135 @@ section {
   display: grid;
   grid-template-columns: 1fr;
   gap: 24px;
-  padding: 48px 0 80px;
+  padding-bottom: 40px;
+}
+
+/* ── Tech filter bar ─────────────────────────────────────── */
+.proj-filter-bar {
+  padding: 32px 0 8px;
+}
+
+.proj-filter-bar__label {
+  font-size: 0.78rem;
+  font-family: var(--font-mono);
+  color: var(--color-text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
+}
+
+.proj-filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.proj-filter-chip {
+  padding: 5px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 100px;
+  background: transparent;
+  color: var(--color-text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.proj-filter-chip:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.proj-filter-chip.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+  box-shadow: 0 0 12px var(--color-primary-glow);
+}
+
+.proj-filter-chip--clear {
+  border-color: transparent;
+  color: var(--color-text-faint);
+  font-size: 0.75rem;
+}
+
+.proj-filter-chip--clear:hover {
+  color: #e05252;
+  border-color: rgba(224, 82, 82, 0.3);
+}
+
+/* ── Results info ────────────────────────────────────────── */
+.proj-results-info {
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  color: var(--color-text-faint);
+  padding: 20px 0 4px;
+}
+
+/* ── Pagination ──────────────────────────────────────────── */
+.proj-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 40px 0 80px;
+  flex-wrap: wrap;
+}
+
+.proj-page-btn {
+  min-width: 38px;
+  height: 38px;
+  padding: 0 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.proj-page-btn:hover:not(:disabled) {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.proj-page-btn.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+  box-shadow: 0 0 12px var(--color-primary-glow);
+  font-weight: 600;
+}
+
+.proj-page-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.proj-page-ellipsis {
+  color: var(--color-text-faint);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  padding: 0 4px;
+}
+
+/* ── No results ──────────────────────────────────────────── */
+.proj-no-results {
+  grid-column: 1 / -1;
+  padding: 64px 24px;
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
 }
 
 .project-card {
@@ -1080,6 +1208,13 @@ section {
   font-size: 0.75rem;
   font-family: var(--font-mono);
   color: var(--color-primary);
+  transition: var(--transition);
+}
+
+.project-card__tech span.tech-active {
+  background: var(--color-primary-dim);
+  border-color: var(--color-primary);
+  color: var(--color-accent);
 }
 
 .project-card:nth-child(2) { transition-delay: 0.1s; }
