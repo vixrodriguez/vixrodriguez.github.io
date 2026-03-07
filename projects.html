@@ -56,10 +56,27 @@
   <main>
     <div class="container">
 
-      <!-- Tech filter chips -->
+      <!-- Tech filter dropdown -->
       <div class="proj-filter-bar" id="projFilterBar">
-        <p class="proj-filter-bar__label" id="projFilterLabel"></p>
-        <div class="proj-filter-chips" id="projFilterChips"></div>
+        <div class="proj-dropdown" id="projDropdown">
+          <button class="proj-dropdown__trigger" id="projDropdownTrigger" aria-haspopup="listbox" aria-expanded="false">
+            <svg class="proj-dropdown__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/>
+            </svg>
+            <span id="projDropdownLabel"></span>
+            <span class="proj-dropdown__badge" id="projDropdownBadge" hidden>0</span>
+            <svg class="proj-dropdown__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+          <div class="proj-dropdown__menu" id="projDropdownMenu" role="listbox" aria-multiselectable="true">
+            <ul id="projDropdownOptions"></ul>
+            <div class="proj-dropdown__footer" id="projDropdownFooter">
+              <button class="proj-dropdown__clear" id="projDropdownClear" hidden></button>
+              <button class="proj-dropdown__apply" id="projDropdownApply"></button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Results info -->
@@ -100,8 +117,9 @@
       <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
 
     /* ── State ─────────────────────────────────────────────────── */
-    let activeTechs = new Set();
-    let currentPage = 1;
+    let activeTechs  = new Set(); // applied filter
+    let pendingTechs = new Set(); // staged inside dropdown (not yet applied)
+    let currentPage  = 1;
 
     /* ── Helpers ───────────────────────────────────────────────── */
     function ui() { return t('projects'); }
@@ -118,7 +136,8 @@
     function filteredItems() {
       const all = sortedItems();
       if (activeTechs.size === 0) return all;
-      return all.filter(p => p.tech.some(tech => activeTechs.has(tech)));
+      // AND: show only projects that include ALL selected techs
+      return all.filter(p => [...activeTechs].every(tech => p.tech.includes(tech)));
     }
 
     function allTechs() {
@@ -127,49 +146,102 @@
       return [...set].sort((a, b) => a.localeCompare(b));
     }
 
-    /* ── Render filter chips ──────────────────────────────────── */
-    function renderFilters() {
-      const chips  = document.getElementById('projFilterChips');
-      const label  = document.getElementById('projFilterLabel');
-      if (!chips || !label) return;
+    /* ── Dropdown ──────────────────────────────────────────────── */
+    let dropdownSetup = false;
 
-      const count = activeTechs.size;
-      const countBadge = count > 0
-        ? `<span class="proj-filter-bar__active-count">${count}</span>`
-        : '';
-      label.innerHTML = `${ui().filter_label}${countBadge}`;
+    function closeDropdown() {
+      const el = document.getElementById('projDropdown');
+      const tr = document.getElementById('projDropdownTrigger');
+      if (el) el.classList.remove('open');
+      if (tr) tr.setAttribute('aria-expanded', 'false');
+    }
 
-      const techs = allTechs();
-      chips.innerHTML = techs.map(tech => {
-        const isActive = activeTechs.has(tech);
-        const check = isActive
-          ? `<span class="proj-filter-chip__check" aria-hidden="true">✓</span>`
-          : '';
-        return `<button class="proj-filter-chip${isActive ? ' active' : ''}"
-                        data-tech="${tech}"
-                        aria-pressed="${isActive}">${check}${tech}</button>`;
-      }).join('') + (count > 0 ? `
-        <button class="proj-filter-chip proj-filter-chip--clear" id="clearFiltersBtn">
-          ✕ ${ui().clear_filters}
-        </button>` : '');
+    function renderOptions() {
+      const optsList = document.getElementById('projDropdownOptions');
+      const clearBtn = document.getElementById('projDropdownClear');
+      if (!optsList) return;
 
-      chips.querySelectorAll('.proj-filter-chip[data-tech]').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const tech = btn.dataset.tech;
-          activeTechs.has(tech) ? activeTechs.delete(tech) : activeTechs.add(tech);
-          currentPage = 1;
-          render();
+      if (clearBtn) clearBtn.hidden = pendingTechs.size === 0;
+
+      optsList.innerHTML = allTechs().map(tech => {
+        const sel = pendingTechs.has(tech);
+        return `<li class="proj-dropdown__option${sel ? ' selected' : ''}"
+                    role="option" aria-selected="${sel}" data-tech="${tech}">
+                  <span class="proj-dropdown__checkbox"></span>${tech}</li>`;
+      }).join('');
+
+      optsList.querySelectorAll('.proj-dropdown__option').forEach(li => {
+        li.addEventListener('click', () => {
+          const tech = li.dataset.tech;
+          if (pendingTechs.has(tech)) {
+            pendingTechs.delete(tech);
+            li.classList.remove('selected');
+            li.setAttribute('aria-selected', 'false');
+          } else {
+            pendingTechs.add(tech);
+            li.classList.add('selected');
+            li.setAttribute('aria-selected', 'true');
+          }
+          if (clearBtn) clearBtn.hidden = pendingTechs.size === 0;
         });
       });
+    }
 
-      const clearBtn = chips.querySelector('#clearFiltersBtn');
-      if (clearBtn) {
-        clearBtn.addEventListener('click', () => {
-          activeTechs.clear();
-          currentPage = 1;
-          render();
-        });
-      }
+    function setupDropdown() {
+      if (dropdownSetup) return;
+      dropdownSetup = true;
+
+      const dropdown = document.getElementById('projDropdown');
+      const trigger  = document.getElementById('projDropdownTrigger');
+      const menu     = document.getElementById('projDropdownMenu');
+      const clearBtn = document.getElementById('projDropdownClear');
+      const applyBtn = document.getElementById('projDropdownApply');
+      if (!dropdown || !trigger || !menu) return;
+
+      // All clicks inside the menu stay inside — never reach document
+      menu.addEventListener('click', e => e.stopPropagation());
+
+      trigger.addEventListener('click', e => {
+        e.stopPropagation();
+        if (dropdown.classList.contains('open')) {
+          closeDropdown();
+        } else {
+          // Sync pending to current applied state every time it opens
+          pendingTechs = new Set(activeTechs);
+          renderOptions();
+          dropdown.classList.add('open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
+
+      clearBtn.addEventListener('click', () => {
+        pendingTechs.clear();
+        renderOptions();
+      });
+
+      applyBtn.addEventListener('click', () => {
+        activeTechs = new Set(pendingTechs);
+        currentPage = 1;
+        closeDropdown();
+        render();
+      });
+
+      document.addEventListener('click', () => closeDropdown());
+    }
+
+    /* ── Render trigger badge & button labels ─────────────────── */
+    function renderFilters() {
+      setupDropdown();
+
+      const labelEl = document.getElementById('projDropdownLabel');
+      const badgeEl = document.getElementById('projDropdownBadge');
+      const applyBtn = document.getElementById('projDropdownApply');
+      const clearBtn = document.getElementById('projDropdownClear');
+
+      if (labelEl)  labelEl.textContent  = ui().filter_label;
+      if (applyBtn) applyBtn.textContent  = ui().filter_apply || 'Aplicar';
+      if (clearBtn) clearBtn.textContent  = `✕ ${ui().clear_filters}`;
+      if (badgeEl)  { badgeEl.textContent = activeTechs.size; badgeEl.hidden = activeTechs.size === 0; }
     }
 
     /* ── Render grid ──────────────────────────────────────────── */
