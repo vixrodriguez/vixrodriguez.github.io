@@ -288,6 +288,14 @@ section {
   background: var(--color-primary-dim);
 }
 
+.nav__link--active {
+  color: var(--color-primary) !important;
+}
+.nav__link--active::after {
+  width: 100% !important;
+  background: var(--color-primary);
+}
+
 .nav__toggle {
   display: none;
   flex-direction: column;
@@ -1818,25 +1826,30 @@ section {
   display: flex;
   flex-direction: column;
   gap: 40px;
-  max-width: 720px;
+  align-items: center;
+  text-align: center;
 }
 
 .talks-teaser__desc {
   font-size: 1.05rem;
   color: var(--color-text-muted);
   line-height: 1.8;
+  max-width: 640px;
 }
 
 .talks-teaser__stats {
   display: flex;
   gap: 48px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .talks-teaser__stat {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  align-items: center;
+  text-align: center;
 }
 
 .talks-teaser__stat-num {

@@ -446,11 +446,8 @@ const translations = {
       title:                    'En el escenario',
       description:              'Conferencias, talleres y charlas técnicas impartidas en eventos de la industria, universidades y comunidades de software a lo largo de mi trayectoria.',
       cta:                      'Ver todas las charlas →',
-      stat_conferences:         '4',
       stat_conferences_label:   'Conferencias',
-      stat_workshops:           '3',
       stat_workshops_label:     'Talleres',
-      stat_talks:               '5',
       stat_talks_label:         'Charlas',
       page_title:               'Charlas & Conferencias',
       page_subtitle:            'Eventos donde he compartido conocimiento sobre tecnología, desarrollo de software y liderazgo técnico.',
@@ -917,11 +914,8 @@ const translations = {
       title:                    'On Stage',
       description:              'Conferences, workshops, and technical talks delivered at industry events, universities, and software communities throughout my career.',
       cta:                      'See all talks →',
-      stat_conferences:         '4',
       stat_conferences_label:   'Conferences',
-      stat_workshops:           '3',
       stat_workshops_label:     'Workshops',
-      stat_talks:               '5',
       stat_talks_label:         'Talks',
       page_title:               'Talks & Conferences',
       page_subtitle:            'Events where I have shared knowledge about technology, software development, and technical leadership.',
@@ -1192,6 +1186,22 @@ function renderExperience() {
 
 const RELEVANCE_ORDER = { featured: 0, relevant: 1, standard: 2 };
 
+function renderTalkStats() {
+  const conf = document.getElementById('teaserStatConferences');
+  const work = document.getElementById('teaserStatWorkshops');
+  const talk = document.getElementById('teaserStatTalks');
+  if (!conf && !work && !talk) return;
+
+  const counts = { conference: 0, workshop: 0, talk: 0 };
+  (typeof talksData !== 'undefined' ? talksData : []).forEach(item => {
+    if (counts[item.type] !== undefined) counts[item.type]++;
+  });
+
+  if (conf) conf.textContent = counts.conference;
+  if (work) work.textContent = counts.workshop;
+  if (talk) talk.textContent = counts.talk;
+}
+
 function renderProjects() {
   const container = document.getElementById('projectsGrid');
   if (!container) return;
@@ -1234,6 +1244,7 @@ function setLanguage(lang) {
   renderCerts();
   renderExperience();
   renderProjects();
+  renderTalkStats();
 
   // Update switcher button label
   const btn = document.getElementById('langSwitcher');
@@ -1266,6 +1277,7 @@ function i18nInit() {
   renderCerts();
   renderExperience();
   renderProjects();
+  renderTalkStats();
 
   // Language switcher
   const langBtn = document.getElementById('langSwitcher');
