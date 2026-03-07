@@ -1005,6 +1005,9 @@ section {
 }
 
 .proj-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   padding: 5px 14px;
   border: 1px solid var(--color-border);
   border-radius: 100px;
@@ -1016,6 +1019,7 @@ section {
   cursor: pointer;
   transition: var(--transition);
   white-space: nowrap;
+  user-select: none;
 }
 
 .proj-filter-chip:hover {
@@ -1024,10 +1028,41 @@ section {
 }
 
 .proj-filter-chip.active {
-  background: var(--color-primary);
+  background: var(--color-primary-dim);
   border-color: var(--color-primary);
+  color: var(--color-primary);
+  box-shadow: 0 0 10px var(--color-primary-glow);
+  font-weight: 600;
+}
+
+.proj-filter-chip__check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-primary);
   color: #fff;
-  box-shadow: 0 0 12px var(--color-primary-glow);
+  font-size: 0.6rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.proj-filter-bar__active-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 100px;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  margin-left: 6px;
+  vertical-align: middle;
 }
 
 .proj-filter-chip--clear {
@@ -1039,6 +1074,7 @@ section {
 .proj-filter-chip--clear:hover {
   color: #e05252;
   border-color: rgba(224, 82, 82, 0.3);
+  background: rgba(224, 82, 82, 0.06);
 }
 
 /* ── Results info ────────────────────────────────────────── */

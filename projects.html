@@ -133,13 +133,22 @@
       const label  = document.getElementById('projFilterLabel');
       if (!chips || !label) return;
 
-      label.textContent = ui().filter_label;
+      const count = activeTechs.size;
+      const countBadge = count > 0
+        ? `<span class="proj-filter-bar__active-count">${count}</span>`
+        : '';
+      label.innerHTML = `${ui().filter_label}${countBadge}`;
 
       const techs = allTechs();
-      chips.innerHTML = techs.map(tech => `
-        <button class="proj-filter-chip${activeTechs.has(tech) ? ' active' : ''}"
-                data-tech="${tech}">${tech}</button>
-      `).join('') + (activeTechs.size > 0 ? `
+      chips.innerHTML = techs.map(tech => {
+        const isActive = activeTechs.has(tech);
+        const check = isActive
+          ? `<span class="proj-filter-chip__check" aria-hidden="true">✓</span>`
+          : '';
+        return `<button class="proj-filter-chip${isActive ? ' active' : ''}"
+                        data-tech="${tech}"
+                        aria-pressed="${isActive}">${check}${tech}</button>`;
+      }).join('') + (count > 0 ? `
         <button class="proj-filter-chip proj-filter-chip--clear" id="clearFiltersBtn">
           ✕ ${ui().clear_filters}
         </button>` : '');
