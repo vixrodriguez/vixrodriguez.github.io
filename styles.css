@@ -549,6 +549,8 @@ section {
 .about__image-wrapper {
   display: flex;
   justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .about__image-frame {
@@ -1683,6 +1685,7 @@ section {
   }
   .about__image-frame {
     max-width: 300px;
+    margin: 0 auto;
   }
   .projects__grid {
     grid-template-columns: 1fr;
