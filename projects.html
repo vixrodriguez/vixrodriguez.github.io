@@ -279,6 +279,10 @@
                 rel="noopener noreferrer">${externalIcon}</a>` : ''}
             </div>
           </div>
+          ${p.logo ? `<div class="project-card__logo">
+            <img src="${p.logo}" alt="${p.title}" loading="lazy"
+                 onerror="this.parentElement.style.display='none'">
+          </div>` : ''}
           <h3 class="project-card__title">${p.title}</h3>
           <p class="project-card__desc">${p.desc}</p>
           <div class="project-card__tech">

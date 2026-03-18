@@ -35,6 +35,8 @@ const translations = {
       fact1: '📍&nbsp; Guayaquil, Ecuador &mdash; Disponible para trabajo remoto',
       fact2: '🎓&nbsp; Ing. Computación · ESPOL (ABET) · AWS · Google AI · Scrum Master',
       fact3: '🌐&nbsp; Español nativo &bull; Inglés profesional',
+      xp_label:    'años de exp.',
+      stack_badge: 'Backend · Cloud · ERP',
       certs_title: 'Certificaciones destacadas',
       download:    'Descargar CV',
     },
@@ -387,6 +389,7 @@ const translations = {
       items: [
         {
           relevance: 'featured',
+          logo:      './assets/logos/projects/nawi.png',
           title: 'NAWI – Plataforma Fintech de Microservicios',
           desc:  'Arquitectura hexagonal de 7+ microservicios para una neobank. Procesamiento de transferencias C2C, retiros ATM, compras nacionales/internacionales e integración con autorizadores externos Dock y STP México.',
           tech:  ['Python', 'Flask', 'Microservicios', 'AWS', 'Hexagonal Arch.'],
@@ -394,6 +397,7 @@ const translations = {
         },
         {
           relevance: 'relevant',
+          logo:      './assets/logos/projects/wambala.png',
           title: 'Wambala – Plataforma para Atletas de Alto Rendimiento',
           desc:  'Migración completa de React.js + Flask + SQLite a Next.js + PostgreSQL. Optimización de generación de horarios deportivos, notificaciones Firebase y entrega de emails con SendGrid.',
           tech:  ['Next.js', 'Flask', 'PostgreSQL', 'Firebase', 'SendGrid'],
@@ -401,6 +405,7 @@ const translations = {
         },
         {
           relevance: 'relevant',
+          logo:      './assets/logos/projects/bitbase.png',
           title: 'BitBase – Middleware para Exchange de Cripto',
           desc:  'Middleware Flask que sincroniza transacciones de ATMs/tiendas a Odoo v15 vía JSON-RPC. Generación de facturas/cotizaciones PDF y manejo de eventos asíncronos con Amazon MQ (RabbitMQ).',
           tech:  ['Python', 'Flask', 'Odoo v15', 'RabbitMQ', 'ELK'],
@@ -408,6 +413,7 @@ const translations = {
         },
         {
           relevance: 'standard',
+          logo:      './assets/logos/projects/loga-hub.png',
           title: 'Loga Hub – Plataforma de Logística y Aduanas',
           desc:  'Módulos de auditoría, itinerarios de navieras y segmentos de socios. Microservicio de reportes con Java Spring Boot e iText7 que desacoupló la carga de generación de documentos del servidor principal.',
           tech:  ['Java', 'Spring Boot', 'Python', 'iText7', 'PostgreSQL'],
@@ -415,6 +421,7 @@ const translations = {
         },
         {
           relevance: 'standard',
+          logo:      './assets/logos/projects/avasant.png',
           title: 'Avasant – Sitio Web Corporativo',
           desc:  'Desarrollo y gestión integral del ecosistema digital de Avasant Consulting S.A.S., consultora especializada en aceleración empresarial y empoderamiento para mujeres emprendedoras y población migrante. Diseño y despliegue bajo WordPress, Astra y Spectra, gestión de infraestructura en Hostinger e integración de Google Workspace. Soluciones técnicas para entrega de contenido multimedia de alta fidelidad.',
           tech:  ['WordPress', 'PHP', 'JavaScript', 'HTML', 'CSS', 'Hostinger', 'DNS', 'Google'],
@@ -504,6 +511,8 @@ const translations = {
       fact1: '📍&nbsp; Guayaquil, Ecuador &mdash; Open to remote work',
       fact2: '🎓&nbsp; B.Sc. Computer Science · ESPOL (ABET) · AWS · Google AI · Scrum Master',
       fact3: '🌐&nbsp; Spanish native &bull; English professional proficiency',
+      xp_label:    'yrs of exp.',
+      stack_badge: 'Backend · Cloud · ERP',
       certs_title: 'Key certifications',
       download:    'Download CV',
     },
@@ -856,6 +865,7 @@ const translations = {
       items: [
         {
           relevance: 'featured',
+          logo:      './assets/logos/projects/nawi.png',
           title: 'NAWI – Fintech Microservices Platform',
           desc:  'Hexagonal architecture with 7+ microservices for a neobank. C2C transfers, ATM withdrawals, national/international purchases, and integration with external authorizers Dock and STP México.',
           tech:  ['Python', 'Flask', 'Microservices', 'AWS', 'Hexagonal Arch.'],
@@ -863,6 +873,7 @@ const translations = {
         },
         {
           relevance: 'relevant',
+          logo:      './assets/logos/projects/wambala.png',
           title: 'Wambala – High-Performance Athlete Platform',
           desc:  'Full platform migration from React.js + Flask + SQLite to Next.js + PostgreSQL. Sports schedule optimization, Firebase notifications, and SendGrid email delivery.',
           tech:  ['Next.js', 'Flask', 'PostgreSQL', 'Firebase', 'SendGrid'],
@@ -870,6 +881,7 @@ const translations = {
         },
         {
           relevance: 'relevant',
+          logo:      './assets/logos/projects/bitbase.png',
           title: 'BitBase – Crypto Exchange Middleware',
           desc:  'Flask middleware synchronizing transactions from sales channels (ATMs/stores) to Odoo v15 via JSON-RPC. PDF invoice/quote generation and async event handling with Amazon MQ (RabbitMQ).',
           tech:  ['Python', 'Flask', 'Odoo v15', 'RabbitMQ', 'ELK'],
@@ -877,6 +889,7 @@ const translations = {
         },
         {
           relevance: 'standard',
+          logo:      './assets/logos/projects/loga-hub.png',
           title: 'Loga Hub – Logistics & Customs Platform',
           desc:  'Audit, shipping line itinerary, and partner segment modules. Reporting microservice with Java Spring Boot and iText7 that decoupled document generation load from the main server.',
           tech:  ['Java', 'Spring Boot', 'Python', 'iText7', 'PostgreSQL'],
@@ -884,6 +897,7 @@ const translations = {
         },
         {
           relevance: 'standard',
+          logo:      './assets/logos/projects/avasant.png',
           title: 'Avasant – Corporate Website',
           desc:  'End-to-end development and management of the digital ecosystem for Avasant Consulting S.A.S., a consultancy specializing in business acceleration programs and empowerment for women entrepreneurs and migrant populations. Design and deployment under WordPress, Astra, and Spectra, infrastructure management on Hostinger, and Google Workspace integration for firm operations. Advanced technical solutions for high-fidelity multimedia content delivery.',
           tech:  ['WordPress', 'PHP', 'JavaScript', 'HTML', 'CSS', 'Hostinger', 'DNS', 'Google'],
@@ -1136,6 +1150,43 @@ function setExpTab(tab) {
   renderExperience();
 }
 
+const COMPANY_LOGOS = {
+  'NAWI':                              './assets/logos/companies/nawi.png',
+  'EELA Institute':                    './assets/logos/companies/eela.png',
+  'Coderland by Dominion':             './assets/logos/companies/coderland.png',
+  'TECNOSMART':                        './assets/logos/companies/tecnosmart.png',
+  'LOGA SYSTEMS':                      './assets/logos/companies/loga.png',
+  'Ecuador On Rails':                  './assets/logos/companies/ecuador-on-rails.png',
+  'DRONCAT S.A.':                      './assets/logos/companies/droncat.png',
+  'Toastmasters Ecuador':              './assets/logos/companies/toastmasters.png',
+  'Milestone Tech Consulting':         './assets/logos/companies/milestone.png',
+  'Tecnológico Sudamericano (TECSU)':  './assets/logos/companies/tecsu.png',
+  '5Bits':                             './assets/logos/companies/5bits.png',
+  'ESPOL – Facultad de Ingeniería':    './assets/logos/companies/espol.png',
+  'ESPOL – Faculty of Engineering':    './assets/logos/companies/espol.png',
+  'IEEE ESPOL Student Branch':         './assets/logos/companies/ieee.png',
+};
+
+function companyInitials(name) {
+  return name.replace(/[()]/g, '').split(/[\s\-–]+/)
+    .filter(Boolean).slice(0, 2).map(w => w[0]).join('').toUpperCase();
+}
+
+function companyLogoHTML(company) {
+  const src = COMPANY_LOGOS[company];
+  const ini = companyInitials(company);
+  if (src) {
+    return `<div class="timeline__logo" title="${company}">
+      <img src="${src}" alt="${company}" loading="lazy"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <span class="timeline__logo-ini" style="display:none">${ini}</span>
+    </div>`;
+  }
+  return `<div class="timeline__logo" title="${company}">
+    <span class="timeline__logo-ini">${ini}</span>
+  </div>`;
+}
+
 function renderExperience() {
   const container = document.getElementById('timelineContainer');
   if (!container) return;
@@ -1155,11 +1206,14 @@ function renderExperience() {
         <div class="timeline__card">
           <button class="timeline__toggle" onclick="toggleExpItem(this)" aria-expanded="true">
             <div class="timeline__header">
-              <div>
-                <h3 class="timeline__role">${job.role}</h3>
-                <p class="timeline__company">${job.company}
-                  <span class="timeline__location">· ${job.location}</span>
-                </p>
+              <div class="timeline__header-left">
+                ${companyLogoHTML(job.company)}
+                <div>
+                  <h3 class="timeline__role">${job.role}</h3>
+                  <p class="timeline__company">${job.company}
+                    <span class="timeline__location">· ${job.location}</span>
+                  </p>
+                </div>
               </div>
               <div class="timeline__header-right">
                 <span class="timeline__period">${job.period}</span>
@@ -1224,6 +1278,10 @@ function renderProjects() {
           ${p.demo ? `<a href="${p.demo}" aria-label="Demo" target="_blank" rel="noopener noreferrer">${externalIcon}</a>` : ''}
         </div>
       </div>
+      ${p.logo ? `<div class="project-card__logo">
+        <img src="${p.logo}" alt="${p.title}" loading="lazy"
+             onerror="this.parentElement.style.display='none'">
+      </div>` : ''}
       <h3 class="project-card__title">${p.title}</h3>
       <p class="project-card__desc">${p.desc}</p>
       <div class="project-card__tech">
