@@ -29,7 +29,7 @@ const translations = {
     about: {
       tag:   '// sobre mí',
       title: 'Quién soy',
-      p1:    'Soy un <strong>Senior Software Engineer</strong> con más de 10 años de experiencia en el desarrollo de aplicaciones web. Me especializo en Odoo (v8–v15), Python (Flask, Django) y Java (Spring Boot), habiendo trabajado en sectores como fintech, logística, cripto, retail y más.',
+      p1:    'Soy <strong>Senior Software Engineer</strong> con más de 10 años de experiencia en el desarrollo de aplicaciones web. Me especializo en Odoo (v8–v15), Python (Flask, Django) y Java (Spring Boot), habiendo trabajado en sectores como fintech, logística, cripto, retail y más.',
       p2:    'Tengo sólida experiencia en <strong>arquitecturas de microservicios hexagonales</strong>, integración de APIs de terceros (CRMs, sistemas bancarios, exchanges de criptomonedas) y despliegues en la nube con AWS. Me apasiona construir soluciones robustas, mantenibles y escalables.',
       p3:    'Fuera del trabajo, soy voluntario activo del <strong>IEEE</strong> desde 2011 (Regional Representative R9, Chapter Chair), miembro de Toastmasters Ecuador y ex Líder Scout. Me impulsa compartir conocimiento y crecer junto a equipos de alto impacto.',
       fact1: '📍&nbsp; Guayaquil, Ecuador &mdash; Disponible para trabajo remoto',
@@ -371,7 +371,7 @@ const translations = {
     projects: {
       tag:            '// proyectos',
       title:          'Proyectos destacados',
-      featured_label: '★ Proyecto destacado',
+      featured_label: 'Proyecto destacado',
       view_all:         'Ver todos los proyectos →',
       page_title:       'Todos los proyectos',
       page_subtitle:    'Colección completa de proyectos: productos, plataformas e integraciones desarrollados a lo largo de mi carrera.',
@@ -847,7 +847,7 @@ const translations = {
     projects: {
       tag:            '// projects',
       title:          'Featured projects',
-      featured_label: '★ Featured project',
+      featured_label: 'Featured project',
       view_all:         'See all projects →',
       page_title:       'All projects',
       page_subtitle:    'Full collection of projects: products, platforms and integrations developed throughout my career.',
